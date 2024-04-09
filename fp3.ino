@@ -42,4 +42,4 @@ int customDistanceFunction(int sensor) {
     Serial.print("Right", distance, "cm");
   }
 }
-hello my name is franny
+
