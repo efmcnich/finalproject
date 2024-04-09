@@ -1,4 +1,4 @@
-fgfg
+
 const int pingPinleft= 4;
 const int pingPinright= 8;
 int leftsensor=0;
