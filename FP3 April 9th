@@ -125,7 +125,7 @@ void loop() {
     sensorReflectance[i]=qtr.read(sensorValues[i]);
     Serial.print(sensorValues[i]);
   }
-    if (sensorReflectance[0]==sensorReflectance[7]>1000){
+    if (sensorReflectance[0] || sensorReflectance[7]>1000){
      drive(0,0);
      delay(1000);
      drive(25,0);
