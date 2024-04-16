@@ -119,6 +119,14 @@ void loop() {
   drive(25, correction); // Drive forward at a base speed of 25, with a correction for direction.
 
   delay(100); // Small delay to make it more controllable
+ delay(100); // Small delay to make it more controllable
+  
+    if (currentPosition==7000){
+     drive(0,0);
+     delay(1000);
+     drive(25,0);
+     return;
+    }
   }
 }
 
