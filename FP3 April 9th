@@ -122,10 +122,10 @@ void loop() {
  delay(100); // Small delay to make it more controllable
   qtr.read(sensorValues);
   for (uint8_t i = 0; i < SensorCount; i++){
-    sensorReflectance[i]=sensorValues[i];
+    sensorReflectance[i]=qtr.read(sensorValues[i]);
     Serial.print(sensorValues[i]);
   }
-    if (sensorReflectance[0]==sensorReflectance[1]==sensorReflectance[2]==sensorReflectance[3]==sensorReflectance[4]==sensorReflectance[5]==sensorReflectance[6]==sensorReflectance[7]>1000){
+    if (sensorReflectance[0]==sensorReflectance[7]>1000){
      drive(0,0);
      delay(1000);
      drive(25,0);
