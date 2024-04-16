@@ -119,6 +119,8 @@ void loop() {
   drive(25, correction); // Drive forward at a base speed of 25, with a correction for direction.
 
   delay(100); // Small delay to make it more controllable
+  if (currentPosition == 0){
+    drive(0,0);
   }
 }
 
