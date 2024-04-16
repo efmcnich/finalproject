@@ -111,16 +111,14 @@ void loop() {
     // No obstacles detected or obstacles are only on one side, continue with line following
 
   // The desired position is the center of the sensor array.
-  int desiredPosition = 3500; // Assuming 7000 is max, adjust based on your calibration
+  int desiredPosition = 3500; // Assuming 7000 is max
   int error = desiredPosition - currentPosition; // Calculate the error.
-  float kp = 0.01; // Proportional gain.
+  float kp = 0.0075; // Proportional gain.
   int correction = kp * error;
 
   drive(25, correction); // Drive forward at a base speed of 25, with a correction for direction.
 
   delay(100); // Small delay to make it more controllable
-  if (currentPosition == 0){
-    drive(0,0);
   }
 }
 
