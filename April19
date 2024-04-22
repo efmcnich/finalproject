@@ -170,7 +170,7 @@ void loop() {
 
     // delay(100);  // Small delay to make it more controllable
     
-    if (average_val==0){
+    if (average_val<=50){
       drive(0,0);
       return;
     }
