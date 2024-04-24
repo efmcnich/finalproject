@@ -136,13 +136,13 @@ void loop() {
     calibratedSpeed = 10.0 / (travelTime); // calculates calibrated speed of robot
     //drive(20, 0); // resumes driving
   }
-  if (counter==2 && (average_val > 350)) {
+  if (counter==2 && (average_val > 350)) { // at third marker
     drive(0,0);
-    delay(1000);
-    unsigned long time_elapsed=millis();
-    drive(20,0);
-    unsigned long timeaftermarker3 = 24/calibratedSpeed;
-    if (time_elapsed==timeaftermarker3){
+    delay(1000); // stops for 1 second
+    unsigned long time_elapsed=millis(); // time since passing marker 3
+    drive(20,0); // resumes driving
+    unsigned long timeaftermarker3 = 24/calibratedSpeed; // distance/speed to calculate time to 24'
+    if (time_elapsed==timeaftermarker3){ // stops the car after the calculated 24' drive time
       drive(0,0);
       delay(2000);
       //drive(20, 0);
