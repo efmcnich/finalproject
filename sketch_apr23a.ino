@@ -13,7 +13,7 @@ const int STBY = 9;   // Standby pin to enable/disable motor driver
 const int BIN1 = 10;  // Direction control for right wheel
 const int BIN2 = 11;  // Direction control for right wheel
 const int PWMB = 12;  // PWM control for right wheel speed
-int counter = 0;
+int counter = 0; // keeps count of how many solid lines have been passed 
 //set trigger and echo pins
 const int leftSensorTriggerPin = 2;
 const int leftSensorEchoPin = 3;
@@ -63,11 +63,11 @@ void setup() {
     qtr.calibrate();
   }
   digitalWrite(LED_BUILTIN, LOW);  // turn off Arduino's LED to indicate we are through with calibration
-  drive(-12,0);
+  drive(-12,0); // drive straight backward
   for (uint16_t i = 0; i < 100; i++) {
     qtr.calibrate();
   }
-  drive(12,0);
+  drive(12,0); // drive straight forward
   for (uint16_t i = 0; i < 100; i++) {
     qtr.calibrate();
   }
@@ -90,9 +90,11 @@ void setup() {
   delay(1000);
 }
 
+// The main loop to run our robot and it's functions required for line-tracking,
+// obstacle detection, and the various marker stops.
 void loop() {
 
-  int currentPosition = linepos();
+  int currentPosition = linepos(); // robots current position over the line
     // Assuming 0 is the minimum value indicating no line detected
     // if (currentPosition == 0) {
     //   drive(0, 0);          // Stop the robot as it has left the track
@@ -109,28 +111,30 @@ void loop() {
 
 //     delay(100); 
 
-  uint16_t position = qtr.readLineBlack(sensorValues);
-  int total=0;
+  uint16_t position = qtr.readLineBlack(sensorValues); // the sensors read the line below
+  int total=0; // initializing the total sensor summation variable
   for (int i=0; i< 8; i++){
-    total=total+=sensorValues[i];
+    total=total+=sensorValues[i]; // calculates the summation of sensor values
   }
-  int number= 8;
-  int average_val= total/number;
+  int number= 8; // number of sensors
+  int average_val= total/number; // average sensor value at a given time
   Serial.print(position);
-  if (counter==0 && (average_val > 350)) {
+  
+  // If loop to define scenarios for each marker the robot goes over
+  if (counter==0 && (average_val > 350)) { // at the first marker
     drive(0, 0); 
-    delay(1000);
+    delay(1000); // stops for 1 second
     // drive(20, 0);
-    marker1Time = millis();
-    counter=1;
-  } else if (counter==1 && (average_val > 350)) {
-    marker2Time = millis();
-    counter= 2;
+    marker1Time = millis(); // defines time at first marker
+    counter=1; // acknowledges the first marker has passed
+  } else if (counter==1 && (average_val > 350)) { // at the second marker
+    marker2Time = millis(); // time at second marker
+    counter= 2; // second marker has passed
     drive(0, 0);
-    delay(1000);
-    unsigned long travelTime = marker1Time - marker2Time;
-    calibratedSpeed = 10.0 / (travelTime);
-    //drive(20, 0);
+    delay(1000); // stops for 1 second
+    unsigned long travelTime = marker1Time - marker2Time; // time between marker 1 and 2
+    calibratedSpeed = 10.0 / (travelTime); // calculates calibrated speed of robot
+    //drive(20, 0); // resumes driving
   }
   if (counter==2 && (average_val > 350)) {
     drive(0,0);
