@@ -20,12 +20,12 @@ const int leftSensorEchoPin = 3;
 const int rightSensorTriggerPin = 4;
 const int rightSensorEchoPin = 5;
 
-
-unsigned long marker1Time = 0;
-unsigned long marker2Time = 0;
-float calibratedSpeed = 0;
-bool marker3Detected = false;
-float distanceAfterMarker3 = 0;
+// Initializing global variables for the 24' checkpoint calculation
+unsigned long marker1Time = 0; // Time at first marker 
+unsigned long marker2Time = 0; // Time at second marker
+float calibratedSpeed = 0; // speed to drive after calibration
+bool marker3Detected = false; // third marker detection variable
+float distanceAfterMarker3 = 0; // distance after third marker
 
 void setup() {
   // Set motor control pins as outputs
