@@ -175,7 +175,7 @@ void loop() {
      int desiredPosition = 3500;                     // Assuming 7000 is max
       int error = desiredPosition - currentPosition;  // Calculate the error.
      float kp = 0.004;                               // Proportional gain.
-     int correction = kp * error;
+     int correction = kp * error;                    // correction for drive rotational value
 
      drive(25, correction);  // Drive forward at a base speed of 25, with a correction for direction.
 
