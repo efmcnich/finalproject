@@ -1,6 +1,8 @@
+// Initialize the Pololu QTR Sensors library for Arduino
 #include <QTRSensors.h>
 QTRSensors qtr;
 
+// Initialize the eight sensors on our robot
 const uint8_t SensorCount = 8;
 uint16_t sensorValues[SensorCount];
 
